@@ -69,7 +69,7 @@ $base64 = base64_encode($image_data);
                     Organisation : <b><?= $data->org_nom ?></b> <br>
                     Type : <b><?= $data->org_type ?></b>
                 </p>
-                <p class="justify">Est accréditée par le Directeur Général de l'Institut National de Santé Publique pour appuyer la riposte de la 16º épidémie de la MVE déclarée dans la province du Kasaï.</p>
+                <p class="justify">Est accréditée par le Directeur Général de l'Institut National de Santé Publique pour appuyer la riposte <b><?= $data->instance_lib ?>/<?= $data->epidemie_lib ?></b> déclarée dans la province du Kasaï.</p>
                 <p class="justify">Par cette note l'organisation accepte de s'aligner sur les orientations du Gouvernement de la République pour l'atteinte des objectifs de la riposte.</p>
                 <table class="table">
                     <tr>
