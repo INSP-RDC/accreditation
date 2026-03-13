@@ -41,6 +41,7 @@ $base64 = base64_encode($image_data);
         .w-100{width:100%}
         .table{width: 100%;border-collapse: collapse;}
         .table td,.table th{border: 1px solid black; text-align: left;padding: 5px;}
+        ul{padding:0; padding-left:15px}
 
     </style>
 </head>
@@ -67,9 +68,10 @@ $base64 = base64_encode($image_data);
                 </div>
                 <p>
                     Organisation : <b><?= $data->org_nom ?></b> <br>
-                    Type : <b><?= $data->org_type ?></b>
+                    Type : <b><?= $data->org_type ?></b><br>
+                    Riposte : <b><?= $data->instance_lib ?>/<?= $data->epidemie_lib ?></b>
                 </p>
-                <p class="justify">Est accréditée par le Directeur Général de l'Institut National de Santé Publique pour appuyer la riposte de la 16º épidémie de la MVE déclarée dans la province du Kasaï.</p>
+                <p class="justify">Est accréditée par le Directeur Général de l'Institut National de Santé Publique pour appuyer la riposte de l'épidemie susmentionnée.</p>
                 <p class="justify">Par cette note l'organisation accepte de s'aligner sur les orientations du Gouvernement de la République pour l'atteinte des objectifs de la riposte.</p>
                 <table class="table">
                     <tr>
@@ -77,20 +79,26 @@ $base64 = base64_encode($image_data);
                         <th>Noms</th>
                         <th>Profil</th>
                         <th>Zones de santé appuyées</th>
-                        <th>Date début</th>
-                        <th>Date fin</th>
+                        <th>Période</th>
                         <th>Axes Axe d'intervention</th>
                     </tr>
                     <?php ob_start(); ?>
                         <td rowspan="<?= $nbr ?>">
-                            <ul>
-                                <?= array_reduce(json_decode($data->zones),function($carry,$item){
-                                    return $carry.'<li>'.$item.'</li>';
-                                },'') ?>
-                            </ul>
+                            <?= array_reduce(json_decode($data->zones),function($carry,$item){
+                                $prov=$item->province;
+                                $zn=implode(', ',array_merge(
+                                    $item->couverture??[],
+                                    $item->risque??[]
+                                ));
+                                
+                                return $carry.'<p>'."<b>$prov:</b><br> <small>$zn</small>".'</p>';
+                            },'') ?>
                         </td>
-                        <td rowspan="<?= $nbr ?>"><?= $data->date_debut_est ?></td>
-                        <td rowspan="<?= $nbr ?>"><?= $data->date_fin_est ?></td>
+                        <td rowspan="<?= $nbr ?>" width="100">
+                            <p>Date début <br><b><small><?= $data->date_debut ?></small></b></p>
+                            <p>Date fin <br><b><small><?= $data->date_fin ?></small></b></p>
+                            
+                        </td>
                         <td rowspan="<?= $nbr ?>">
                             <ul>
                                 <?= array_reduce(json_decode($data->domaine_intervention,true),function($carry,$item){

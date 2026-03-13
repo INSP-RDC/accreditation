@@ -95,6 +95,7 @@ JOIN user u ON u.id=d.user_id
  JOIN instance i ON i.id=d.instance_id
  join epidemie e on e.id=i.epidemie_id
  join organisation o on o.id=u.organisation_id
+ order by create_at desc
 ;
 
 create or replace table note_accredit(

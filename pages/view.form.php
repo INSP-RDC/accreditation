@@ -85,14 +85,33 @@
     <div class="card card-success card-outline">
         <div class="card-header"><h4 class="card-title"> Durée d'appui </h4></div>
         <div class="card-body">
-            <dl>
-                <dt>Date de début</dt>
-                <dd><?= $demande->date_debut ?></dd>
-            </dl>
-            <dl>
-                <dt>Date de fin prevue</dt>
-                <dd><?= $demande->date_fin ?></dd>
-            </dl>
+            <form action="view?_a=update-periode&id=<?= $id ?>" method="post">
+                <div class="row">
+                    <div class="col-md">
+                        <h4>Période sollicitée</h4>
+                        <div class="form-group">
+                            <label for="">Date de début</label>
+                            <span class="form-control"><?= $demande->date_debut_est ?></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Date de fin</label>
+                            <span class="form-control"><?= $demande->date_fin_est ?></span>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <h4>Période accordée</h4>
+                        <div class="form-group">
+                            <label for="">Date de début</label>
+                            <input type="date" name="date_debut" class="form-control" value="<?= $demande->date_debut ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Date de fin</label>
+                            <input type="date" name="date_fin" class="form-control" value="<?= $demande->date_fin ?>">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right <?= $_user->profile=='Interne'?'':'d-none' ?>"><input type="submit" value="Modifier" class="btn btn-primary"></div>
+            </form>
         </div>
     </div>
     <div class="card card-success card-outline">

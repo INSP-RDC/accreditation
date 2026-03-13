@@ -65,21 +65,15 @@ $demande_rejete=$cn->query("select count(*) nbr from v_demande where etat='Refus
 </div>
 <div class="row">
     <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-      <?php foreach($vague as $v): ?>
-      <div class="card card-success card-outline">
-       <div class="card-body">
-         <h4 class="card-title text-bold">
-          <?= $v->epidemie_lib ?> -
-          <small><?= $v->lib ?></small>
-        </h4>
-         <p class="card-text">
-          <dl><dt>Date de début</dt><dd><?= $v->create_at ?></dd></dl>
-        </p>
-        <p><?= $v->obs ?></p>
-         <a href="form?id=<?= $v->id ?>" class="btn btn-outline-success float-right">Demander accreditation</a>
-       </div>
-      </div>
-      <?php endforeach ?>
+      <div class="card card-body card-outline card-success p-0"><table class="table table-sm">
+        <?php foreach($vague as $v): ?>
+        <tr>
+          <td><?= $v->epidemie_lib ?> <br><small><?= $v->lib ?></small></td>
+          <td width="30%"><small><?= $v->create_at ?></small></td>
+          <td width="30%"><a href="form?id=<?= $v->id ?>" class="btn btn-sm btn-outline-success">Demander accreditation</a></td>
+        </tr>
+        <?php endforeach?>
+      </table></div>
     </div>
     <div class="col" data-aos="fade-up" data-aos-delay="300">
       <div class="card card-body card-warning card-outline">

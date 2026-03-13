@@ -1,10 +1,15 @@
 <?php 
 session_start();
 
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'accred');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+
 $db=(object)[
-    'dsn'=>'mysql:host=localhost;dbname=accred;charset=utf8',
-    'user'=>'root',
-    'pwd'=>''
+    'dsn'=>'mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8',
+    'user'=>DB_USER,
+    'pwd'=>DB_PASS
 ];
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Active les exceptions
